@@ -349,12 +349,72 @@
 
     // Enhanced Hero Animations
 
-    // Create and initialize hero animations
+    // Optimized function to create digital lightning
+    function createDigitalLightning(container) {
+        // Remove any existing lightning to prevent multiplication
+        const existingLightning = container.querySelector('.digital-lightning');
+        if (existingLightning) {
+            existingLightning.remove();
+        }
+        
+        const digitalLightning = document.createElement('div');
+        digitalLightning.className = 'digital-lightning';
+        container.appendChild(digitalLightning);
+        
+        // Determine number of bolts based on screen size
+        const isMobile = window.innerWidth <= 768;
+        const numberOfBolts = isMobile ? 5 : 15;
+        
+        // Create lightning bolts
+        for (let i = 0; i < numberOfBolts; i++) {
+            const bolt = document.createElement('div');
+            bolt.className = 'lightning-bolt';
+            
+            // Random position
+            bolt.style.left = `${Math.random() * 100}%`;
+            bolt.style.top = `${Math.random() * 50}%`;
+            
+            // Random rotation
+            bolt.style.transform = `rotate(${Math.random() * 180 - 90}deg)`;
+            
+            // Random delay with larger gaps to prevent overwhelming effect
+            bolt.style.animationDelay = `${Math.random() * 10}s`;
+            
+            // Random color
+            const colors = ['rgba(0, 198, 255, 0.8)', 'rgba(255, 0, 102, 0.8)', 'rgba(255, 255, 0, 0.8)'];
+            bolt.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            
+            digitalLightning.appendChild(bolt);
+        }
+    }
+
+    // Add searchlight effect
+    function createSearchlight(container) {
+        // Remove any existing searchlight
+        const existingSearchlight = container.querySelector('.searchlight');
+        if (existingSearchlight) {
+            existingSearchlight.remove();
+        }
+        
+        const searchlight = document.createElement('div');
+        searchlight.className = 'searchlight';
+        container.appendChild(searchlight);
+        
+        const beam = document.createElement('div');
+        beam.className = 'searchlight-beam';
+        searchlight.appendChild(beam);
+    }
+
+    // Modified function to enhance hero animations with better control
     function enhanceHeroAnimations() {
         const heroSection = document.querySelector('.hero-section');
         if (!heroSection) return;
         
-        // Add digital lightning effect
+        // Clear any existing animations to prevent duplication
+        const existingEffects = heroSection.querySelectorAll('.digital-lightning, .lighting-effect, .speaker-vibration, .equalizer-container, .equalizer-reflection, .particles-container, .searchlight');
+        existingEffects.forEach(effect => effect.remove());
+        
+        // Add digital lightning effect with controlled number
         createDigitalLightning(heroSection);
         
         // Add light beam effects
@@ -366,40 +426,14 @@
         // Add equalizer effect
         createEqualizerEffect(heroSection);
         
-        // Add particle effects
+        // Add searchlight effect
+        //createSearchlight(heroSection);
+        
+        // Add particle effects - reduced for mobile
         createParticleEffect(heroSection);
         
         // Add glowing text effect
         addGlowingTextEffect();
-    }
-
-    // Create digital lightning effect
-    function createDigitalLightning(container) {
-        const digitalLightning = document.createElement('div');
-        digitalLightning.className = 'digital-lightning';
-        container.appendChild(digitalLightning);
-        
-        // Create multiple lightning bolts
-        for (let i = 0; i < 15; i++) {
-            const bolt = document.createElement('div');
-            bolt.className = 'lightning-bolt';
-            
-            // Random position
-            bolt.style.left = `${Math.random() * 100}%`;
-            bolt.style.top = `${Math.random() * 50}%`;
-            
-            // Random rotation
-            bolt.style.transform = `rotate(${Math.random() * 180 - 90}deg)`;
-            
-            // Random delay
-            bolt.style.animationDelay = `${Math.random() * 5}s`;
-            
-            // Random color
-            const colors = ['rgba(0, 198, 255, 0.8)', 'rgba(255, 0, 102, 0.8)', 'rgba(255, 255, 0, 0.8)'];
-            bolt.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-            
-            digitalLightning.appendChild(bolt);
-        }
     }
 
     // Create light beam effects
@@ -451,35 +485,43 @@
         }
     }
 
-    // Create equalizer effect
+    // Function to create a more digital equalizer effect matching the image
     function createEqualizerEffect(container) {
         // Remove any existing equalizer
         const existingEqualizer = container.querySelector('.equalizer-container');
-        if (existingEqualizer) {
-            existingEqualizer.remove();
-        }
+        const existingReflection = container.querySelector('.equalizer-reflection');
+        if (existingEqualizer) existingEqualizer.remove();
+        if (existingReflection) existingReflection.remove();
+        
+        // Get hero content to position equalizer properly
+        const heroContent = container.querySelector('.hero-content');
+        if (!heroContent) return;
+        
+        // Adjust hero content margin to make space for equalizer
+        heroContent.style.marginTop = '200px';
         
         // Create equalizer container
         const equalizerContainer = document.createElement('div');
         equalizerContainer.className = 'equalizer-container';
         
-        // Create equalizer bars
+        // Create equalizer bars - exactly 20 to match the image
         for (let i = 0; i < 20; i++) {
             const bar = document.createElement('div');
             bar.className = 'equalizer-bar';
             
-            // Random initial height
-            const height = Math.floor(Math.random() * 90) + 10;
+            // Digital stepped heights (more variation)
+            const heightSteps = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120];
+            const height = heightSteps[Math.floor(Math.random() * heightSteps.length)];
             bar.style.height = `${height}px`;
             
-            // Random animation duration
-            const duration = (Math.random() * 0.5) + 0.7;
-            bar.style.animationDuration = `${duration}s`;
+            // Faster animation
+            bar.style.animationDuration = '0.5s';
             
             equalizerContainer.appendChild(bar);
         }
         
-        container.appendChild(equalizerContainer);
+        // Insert equalizer before hero content to position it above
+        container.insertBefore(equalizerContainer, heroContent);
         
         // Create reflection
         const reflection = document.createElement('div');
@@ -491,7 +533,8 @@
             reflection.appendChild(reflectionBar);
         });
         
-        container.appendChild(reflection);
+        // Insert reflection after equalizer but before hero content
+        container.insertBefore(reflection, heroContent);
     }
 
     // Create particle effect
@@ -538,14 +581,18 @@
         }
     }
 
-    // Initialize all animations
+    // Initialize animations with window size check
     document.addEventListener('DOMContentLoaded', function() {
         enhanceHeroAnimations();
-    });
-
-    // Reinitialize animations when window is resized
-    window.addEventListener('resize', function() {
-        enhanceHeroAnimations();
+        
+        // Reinitialize on resize with debounce to prevent excessive calls
+        let resizeTimeout;
+        window.addEventListener('resize', function() {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(function() {
+                enhanceHeroAnimations();
+            }, 250);
+        });
     });
 
 })(); 

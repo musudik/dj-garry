@@ -59,7 +59,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="sound-wave-animation">
+                <!-- <div class="sound-wave-animation">
                     <div class="sound-bar"></div>
                     <div class="sound-bar"></div>
                     <div class="sound-bar"></div>
@@ -68,7 +68,7 @@
                     <div class="sound-bar"></div>
                     <div class="sound-bar"></div>
                     <div class="sound-bar"></div>
-                </div>
+                </div> -->
             </div>
         </div>
     </section>
@@ -754,7 +754,8 @@
         <div class="footer-bottom">
             <div class="container">
                 <div class="copyright">
-                    <p>&copy; 2025 DJ Garry. All Rights Reserved.</p>
+                    <p>&copy; 2023 DJ Garry. All Rights Reserved.</p>
+                    <p class="powered-by">Powered by <a href="https://www.fkgpt.dev" target="_blank">fkgpt.dev</a></p>
                 </div>
             </div>
         </div>
@@ -1037,6 +1038,628 @@
                 heroSection.appendChild(reflection);
             }
         });
+    </script>
+
+    <!-- Add this right before the closing </body> tag -->
+    <script>
+        // Ensure equalizer is positioned correctly above the text
+        document.addEventListener('DOMContentLoaded', function() {
+            const heroSection = document.querySelector('.hero-section');
+            const heroContent = document.querySelector('.hero-content');
+            
+            if (heroSection && heroContent) {
+                // Adjust hero content position
+                heroContent.style.marginTop = '200px';
+                
+                // Remove any existing equalizer
+                const existingEqualizer = heroSection.querySelector('.equalizer-container');
+                const existingReflection = heroSection.querySelector('.equalizer-reflection');
+                
+                if (existingEqualizer) existingEqualizer.remove();
+                if (existingReflection) existingReflection.remove();
+                
+                // Create digital equalizer
+                const equalizerContainer = document.createElement('div');
+                equalizerContainer.className = 'equalizer-container';
+                equalizerContainer.style.position = 'absolute';
+                equalizerContainer.style.top = '20%';
+                equalizerContainer.style.left = '50%';
+                equalizerContainer.style.transform = 'translateX(-50%)';
+                equalizerContainer.style.zIndex = '2';
+                
+                // Create equalizer bars - exactly matching the image
+                const colors = [
+                    '#4b0082', '#6a0dad', '#8a2be2', '#9370db', '#ee82ee', 
+                    '#ff69b4', '#dc143c', '#ff0000', '#ff4500', '#ff8c00',
+                    '#ffa500', '#ffff00', '#ffff99', '#adff2f', '#7fff00',
+                    '#00ff00', '#32cd32', '#00ffff', '#1e90ff', '#0000ff'
+                ];
+                
+                for (let i = 0; i < 20; i++) {
+                    const bar = document.createElement('div');
+                    bar.className = 'equalizer-bar';
+                    
+                    // Digital stepped heights
+                    const heightSteps = [10, 30, 60, 90, 120];
+                    const height = heightSteps[Math.floor(Math.random() * heightSteps.length)];
+                    bar.style.height = `${height}px`;
+                    
+                    // Set color from the image
+                    bar.style.backgroundColor = colors[i];
+                    
+                    // Make it square/rectangular
+                    bar.style.borderRadius = '0';
+                    bar.style.width = '12px';
+                    
+                    // Faster animation
+                    bar.style.animation = 'equalize 0.5s infinite ease-in-out alternate';
+                    
+                    equalizerContainer.appendChild(bar);
+                }
+                
+                // Insert equalizer before hero content
+                heroSection.insertBefore(equalizerContainer, heroContent);
+                
+                // Create reflection
+                const reflection = document.createElement('div');
+                reflection.className = 'equalizer-reflection';
+                reflection.style.position = 'absolute';
+                reflection.style.top = 'calc(20% + 120px)';
+                reflection.style.left = '50%';
+                reflection.style.transform = 'translateX(-50%) scaleY(-1)';
+                reflection.style.opacity = '0.3';
+                reflection.style.zIndex = '1';
+                
+                // Clone the bars for the reflection
+                equalizerContainer.childNodes.forEach(bar => {
+                    const reflectionBar = bar.cloneNode(true);
+                    reflectionBar.style.opacity = '0.5';
+                    reflection.appendChild(reflectionBar);
+                });
+                
+                // Insert reflection after equalizer
+                heroSection.insertBefore(reflection, heroContent);
+            }
+        });
+    </script>
+
+    <!-- Emergency fix for equalizer positioning and appearance -->
+    <script>
+      // This script will run immediately when added to the page
+      (function() {
+        // Function to fix the equalizer
+        function fixEqualizer() {
+          console.log("Fixing equalizer...");
+          
+          // Get the hero section and content
+          const heroSection = document.querySelector('.hero-section');
+          const heroContent = document.querySelector('.hero-content');
+          
+          if (!heroSection || !heroContent) {
+            console.error("Hero section or content not found");
+            return;
+          }
+          
+          // Force hero content down to make room for equalizer
+          heroContent.style.marginTop = "200px !important";
+          heroContent.setAttribute("style", "margin-top: 200px !important; position: relative; z-index: 3;");
+          
+          // Remove any existing equalizers to avoid duplicates
+          const existingEqualizers = document.querySelectorAll('.equalizer-container, .equalizer-reflection');
+          existingEqualizers.forEach(el => el.remove());
+          
+          // Create new equalizer container with inline styles
+          const equalizer = document.createElement('div');
+          equalizer.className = 'new-equalizer-container';
+          equalizer.style.cssText = `
+            position: absolute !important;
+            top: 20% !important;
+            left: 50% !important;
+            transform: translateX(-50%) !important;
+            width: 80% !important;
+            max-width: 800px !important;
+            height: 120px !important;
+            display: flex !important;
+            align-items: flex-end !important;
+            justify-content: center !important;
+            gap: 1px !important;
+            z-index: 2 !important;
+          `;
+          
+          // Colors exactly matching the image
+          const colors = [
+            '#4b0082', '#6a0dad', '#8a2be2', '#9370db', '#ee82ee', 
+            '#ff69b4', '#dc143c', '#ff0000', '#ff4500', '#ff8c00',
+            '#ffa500', '#ffff00', '#ffff99', '#adff2f', '#7fff00',
+            '#00ff00', '#32cd32', '#00ffff', '#1e90ff', '#0000ff'
+          ];
+          
+          // Create 20 bars with inline styles
+          for (let i = 0; i < 20; i++) {
+            const bar = document.createElement('div');
+            bar.className = 'new-equalizer-bar';
+            
+            // Random height from stepped values
+            const heights = [10, 30, 60, 90, 120];
+            const height = heights[Math.floor(Math.random() * heights.length)];
+            
+            // Apply inline styles with !important
+            bar.style.cssText = `
+              width: 12px !important;
+              height: ${height}px !important;
+              background-color: ${colors[i]} !important;
+              border-radius: 0 !important;
+              animation: new-equalize 0.5s infinite ease-in-out alternate !important;
+            `;
+            
+            equalizer.appendChild(bar);
+          }
+          
+          // Insert equalizer before hero content
+          heroSection.insertBefore(equalizer, heroContent);
+          
+          // Create reflection with inline styles
+          const reflection = document.createElement('div');
+          reflection.className = 'new-equalizer-reflection';
+          reflection.style.cssText = `
+            position: absolute !important;
+            top: calc(20% + 120px) !important;
+            left: 50% !important;
+            transform: translateX(-50%) scaleY(-1) !important;
+            width: 80% !important;
+            max-width: 800px !important;
+            height: 60px !important;
+            display: flex !important;
+            align-items: flex-end !important;
+            justify-content: center !important;
+            gap: 1px !important;
+            z-index: 1 !important;
+            opacity: 0.3 !important;
+            filter: blur(1px) !important;
+          `;
+          
+          // Clone bars for reflection
+          equalizer.childNodes.forEach(bar => {
+            const reflectionBar = bar.cloneNode(true);
+            reflectionBar.style.opacity = "0.5 !important";
+            reflection.appendChild(reflectionBar);
+          });
+          
+          // Insert reflection after equalizer
+          heroSection.insertBefore(reflection, heroContent);
+          
+          // Add keyframe animation directly to the document
+          const styleSheet = document.createElement("style");
+          styleSheet.type = "text/css";
+          styleSheet.textContent = `
+            @keyframes new-equalize {
+              0% { height: 10px !important; }
+              25% { height: 30px !important; }
+              50% { height: 60px !important; }
+              75% { height: 90px !important; }
+              100% { height: 120px !important; }
+            }
+          `;
+          document.head.appendChild(styleSheet);
+          
+          console.log("Equalizer fixed!");
+        }
+        
+        // Run immediately
+        fixEqualizer();
+        
+        // Also run after a short delay to ensure DOM is fully loaded
+        setTimeout(fixEqualizer, 500);
+        
+        // And run when window is fully loaded
+        window.addEventListener('load', fixEqualizer);
+      })();
+    </script>
+
+    <!-- Add this at the very end of your HTML file, right before the closing </body> tag -->
+    <script>
+      // Emergency fix for equalizer - completely standalone
+      document.addEventListener('DOMContentLoaded', function() {
+        console.log("Starting emergency equalizer fix...");
+        
+        // Step 1: Find the hero section
+        const heroSection = document.querySelector('.hero-section');
+        if (!heroSection) {
+          console.error("Hero section not found");
+          return;
+        }
+        
+        // Step 2: Find or create the hero content
+        let heroContent = heroSection.querySelector('.hero-content');
+        if (!heroContent) {
+          console.error("Hero content not found, but we'll continue");
+        }
+        
+        // Step 3: Remove any existing equalizers to avoid duplicates
+        const existingEqualizers = document.querySelectorAll('.equalizer-container, .equalizer-reflection');
+        existingEqualizers.forEach(el => {
+          try {
+            el.remove();
+          } catch (e) {
+            console.error("Error removing existing equalizer:", e);
+          }
+        });
+        
+        // Step 4: Create new equalizer container
+        const equalizer = document.createElement('div');
+        equalizer.className = 'emergency-equalizer';
+        equalizer.style.cssText = `
+          position: absolute;
+          top: 20%;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 80%;
+          max-width: 800px;
+          height: 120px;
+          display: flex;
+          align-items: flex-end;
+          justify-content: center;
+          gap: 1px;
+          z-index: 100;
+        `;
+        
+        // Step 5: Colors exactly matching the image
+        const colors = [
+          '#4b0082', '#6a0dad', '#8a2be2', '#9370db', '#ee82ee', 
+          '#ff69b4', '#dc143c', '#ff0000', '#ff4500', '#ff8c00',
+          '#ffa500', '#ffff00', '#ffff99', '#adff2f', '#7fff00',
+          '#00ff00', '#32cd32', '#00ffff', '#1e90ff', '#0000ff'
+        ];
+        
+        // Step 6: Create 20 bars
+        for (let i = 0; i < 20; i++) {
+          const bar = document.createElement('div');
+          bar.className = 'emergency-equalizer-bar';
+          
+          // Random height from stepped values
+          const heights = [10, 30, 60, 90, 120];
+          const height = heights[Math.floor(Math.random() * heights.length)];
+          
+          // Apply inline styles
+          bar.style.cssText = `
+            width: 12px;
+            height: ${height}px;
+            background-color: ${colors[i]};
+            border-radius: 0;
+            animation: emergency-equalize 0.5s infinite ease-in-out alternate;
+          `;
+          
+          equalizer.appendChild(bar);
+        }
+        
+        // Step 7: Safely append equalizer to hero section
+        try {
+          heroSection.appendChild(equalizer);
+          console.log("Equalizer added successfully");
+        } catch (e) {
+          console.error("Error appending equalizer:", e);
+        }
+        
+        // Step 8: Create reflection
+        const reflection = document.createElement('div');
+        reflection.className = 'emergency-equalizer-reflection';
+        reflection.style.cssText = `
+          position: absolute;
+          top: calc(20% + 120px);
+          left: 50%;
+          transform: translateX(-50%) scaleY(-1);
+          width: 80%;
+          max-width: 800px;
+          height: 60px;
+          display: flex;
+          align-items: flex-end;
+          justify-content: center;
+          gap: 1px;
+          z-index: 99;
+          opacity: 0.3;
+          filter: blur(1px);
+        `;
+        
+        // Step 9: Clone bars for reflection
+        equalizer.childNodes.forEach(bar => {
+          try {
+            const reflectionBar = bar.cloneNode(true);
+            reflectionBar.style.opacity = "0.5";
+            reflection.appendChild(reflectionBar);
+          } catch (e) {
+            console.error("Error cloning bar:", e);
+          }
+        });
+        
+        // Step 10: Safely append reflection to hero section
+        try {
+          heroSection.appendChild(reflection);
+          console.log("Reflection added successfully");
+        } catch (e) {
+          console.error("Error appending reflection:", e);
+        }
+        
+        // Step 11: If hero content exists, adjust its position
+        if (heroContent) {
+          try {
+            heroContent.style.marginTop = "200px";
+            heroContent.style.position = "relative";
+            heroContent.style.zIndex = "101";
+            console.log("Hero content position adjusted");
+          } catch (e) {
+            console.error("Error adjusting hero content:", e);
+          }
+        }
+        
+        // Step 12: Add keyframe animation
+        try {
+          const styleSheet = document.createElement("style");
+          styleSheet.type = "text/css";
+          styleSheet.textContent = `
+            @keyframes emergency-equalize {
+              0% { height: 10px; }
+              25% { height: 30px; }
+              50% { height: 60px; }
+              75% { height: 90px; }
+              100% { height: 120px; }
+            }
+          `;
+          document.head.appendChild(styleSheet);
+          console.log("Animation styles added");
+        } catch (e) {
+          console.error("Error adding animation styles:", e);
+        }
+        
+        console.log("Emergency equalizer fix complete!");
+        
+        // Step 13: Start animation loop for bars
+        function animateBars() {
+          const bars = document.querySelectorAll('.emergency-equalizer-bar');
+          const heights = [10, 30, 60, 90, 120];
+          
+          bars.forEach(bar => {
+            const height = heights[Math.floor(Math.random() * heights.length)];
+            bar.style.height = `${height}px`;
+          });
+          
+          setTimeout(animateBars, 500); // Update every 500ms
+        }
+        
+        // Start the animation
+        animateBars();
+      });
+    </script>
+
+    <!-- Add this at the very end of your HTML file, right before the closing </body> tag -->
+    <script>
+      // New equalizer animation based on the uploaded image
+      document.addEventListener('DOMContentLoaded', function() {
+        console.log("Creating new radial equalizer animation...");
+        
+        // Find the hero section
+        const heroSection = document.querySelector('.hero-section');
+        if (!heroSection) {
+          console.error("Hero section not found");
+          return;
+        }
+        
+        // Remove any existing equalizers
+        const existingEqualizers = document.querySelectorAll('.equalizer-container, .equalizer-reflection, .new-equalizer-container, .new-equalizer-reflection');
+        existingEqualizers.forEach(el => {
+          try {
+            el.remove();
+          } catch (e) {
+            console.error("Error removing existing equalizer:", e);
+          }
+        });
+        
+        // Create radial equalizer container
+        const radialEqualizer = document.createElement('div');
+        radialEqualizer.className = 'radial-equalizer';
+        radialEqualizer.style.cssText = `
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%) rotate(180deg);
+          width: 100%;
+          height: 100%;
+          z-index: 5;
+          pointer-events: none;
+          overflow: hidden;
+        `;
+        
+        // Create center light
+        const centerLight = document.createElement('div');
+        centerLight.className = 'center-light';
+        centerLight.style.cssText = `
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 80px;
+          height: 80px;
+          background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,200,0,0.8) 50%, rgba(255,100,0,0.4) 100%);
+          border-radius: 50%;
+          box-shadow: 0 0 50px 20px rgba(255,255,255,0.8);
+          animation: pulse 3s infinite alternate;
+          z-index: 10;
+        `;
+        
+        // Create radial rays
+        const raysContainer = document.createElement('div');
+        raysContainer.className = 'rays-container';
+        raysContainer.style.cssText = `
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 100%;
+          height: 100%;
+          background: radial-gradient(circle, rgba(255,165,0,0.3) 0%, rgba(0,0,0,0) 70%);
+          z-index: 6;
+        `;
+        
+        // Create grid background
+        const gridBackground = document.createElement('div');
+        gridBackground.className = 'grid-background';
+        gridBackground.style.cssText = `
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-image: linear-gradient(rgba(0,0,50,0.5) 1px, transparent 1px), 
+                            linear-gradient(90deg, rgba(0,0,50,0.5) 1px, transparent 1px);
+          background-size: 20px 20px;
+          z-index: 4;
+        `;
+        
+        // Create equalizer bars - left side
+        const leftEqualizer = document.createElement('div');
+        leftEqualizer.className = 'side-equalizer left-equalizer';
+        leftEqualizer.style.cssText = `
+          position: absolute;
+          top: 50%;
+          left: 0;
+          transform: translateY(-50%);
+          width: 40%;
+          height: 60%;
+          display: flex;
+          align-items: center;
+          justify-content: space-around;
+          z-index: 7;
+        `;
+        
+        // Create equalizer bars - right side
+        const rightEqualizer = document.createElement('div');
+        rightEqualizer.className = 'side-equalizer right-equalizer';
+        rightEqualizer.style.cssText = `
+          position: absolute;
+          top: 50%;
+          right: 0;
+          transform: translateY(-50%);
+          width: 40%;
+          height: 60%;
+          display: flex;
+          align-items: center;
+          justify-content: space-around;
+          z-index: 7;
+        `;
+        
+        // Colors for the equalizer bars - vibrant colors from the image
+        const colors = [
+          '#00ffff', '#00ccff', '#0099ff', '#0066ff', '#0033ff',
+          '#0000ff', '#3300ff', '#6600ff', '#9900ff', '#cc00ff',
+          '#ff00ff', '#ff00cc', '#ff0099', '#ff0066', '#ff0033',
+          '#ff0000', '#ff3300', '#ff6600', '#ff9900', '#ffcc00',
+          '#ffff00', '#ccff00', '#99ff00', '#66ff00', '#33ff00',
+          '#00ff00', '#00ff33', '#00ff66', '#00ff99', '#00ffcc'
+        ];
+        
+        // Create bars for left side
+        for (let i = 0; i < 15; i++) {
+          createBar(leftEqualizer, colors[i % colors.length], i);
+        }
+        
+        // Create bars for right side
+        for (let i = 0; i < 15; i++) {
+          createBar(rightEqualizer, colors[(i + 15) % colors.length], i);
+        }
+        
+        // Function to create a bar
+        function createBar(container, color, index) {
+          const barContainer = document.createElement('div');
+          barContainer.className = 'bar-container';
+          barContainer.style.cssText = `
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100%;
+            width: ${100 / 15}%;
+          `;
+          
+          // Create multiple segments for each bar
+          const segments = 12; // Number of segments per bar
+          for (let j = 0; j < segments; j++) {
+            const segment = document.createElement('div');
+            segment.className = 'bar-segment';
+            segment.style.cssText = `
+              width: 80%;
+              height: ${100 / segments - 2}%;
+              margin: 1px 0;
+              background-color: ${color};
+              opacity: 0.2;
+              transition: opacity 0.1s ease;
+            `;
+            barContainer.appendChild(segment);
+          }
+          
+          container.appendChild(barContainer);
+        }
+        
+        // Add all elements to the radial equalizer
+        radialEqualizer.appendChild(gridBackground);
+        radialEqualizer.appendChild(raysContainer);
+        radialEqualizer.appendChild(leftEqualizer);
+        radialEqualizer.appendChild(rightEqualizer);
+        radialEqualizer.appendChild(centerLight);
+        
+        // Add the radial equalizer to the hero section
+        heroSection.appendChild(radialEqualizer);
+        
+        // Add keyframe animations
+        const styleSheet = document.createElement("style");
+        styleSheet.type = "text/css";
+        styleSheet.textContent = `
+          @keyframes pulse {
+            0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.8; }
+            100% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+          }
+        `;
+        document.head.appendChild(styleSheet);
+        
+        // Animate the equalizer bars
+        function animateEqualizer() {
+          const leftBars = leftEqualizer.querySelectorAll('.bar-container');
+          const rightBars = rightEqualizer.querySelectorAll('.bar-container');
+          
+          // Animate left side
+          leftBars.forEach(bar => {
+            const segments = bar.querySelectorAll('.bar-segment');
+            const activeSegments = Math.floor(Math.random() * segments.length);
+            
+            segments.forEach((segment, index) => {
+              if (index < activeSegments) {
+                segment.style.opacity = '1';
+              } else {
+                segment.style.opacity = '0.2';
+              }
+            });
+          });
+          
+          // Animate right side
+          rightBars.forEach(bar => {
+            const segments = bar.querySelectorAll('.bar-segment');
+            const activeSegments = Math.floor(Math.random() * segments.length);
+            
+            segments.forEach((segment, index) => {
+              if (index < activeSegments) {
+                segment.style.opacity = '1';
+              } else {
+                segment.style.opacity = '0.2';
+              }
+            });
+          });
+          
+          // Continue animation
+          setTimeout(animateEqualizer, 100);
+        }
+        
+        // Start animation
+        animateEqualizer();
+        
+        console.log("Rotated radial equalizer animation created successfully!");
+      });
     </script>
 </body>
 </html> 

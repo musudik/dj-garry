@@ -1684,4 +1684,22 @@ section:not(.hero-section) {
   .equipment-image {
     height: 180px;
   }
+}
+
+/* Footer attribution styling */
+.powered-by {
+  margin-top: 10px;
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.powered-by a {
+  color: var(--primary-color);
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.powered-by a:hover {
+  color: var(--secondary-color);
+  text-decoration: underline;
 } 
