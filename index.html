@@ -648,7 +648,7 @@
                         <h3>Send Us a Message</h3>
                         <p>Fill out the form below and we'll get back to you as soon as possible.</p>
                     </div>
-                    <form id="rental-inquiry-form" class="contact-form">
+                    <form id="rental-inquiry-form" class="contact-form" action="https://formspree.io/f/your_formspree_id" method="POST">
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="name">Your Name</label>
@@ -685,7 +685,9 @@
                             <label for="message">Your Message</label>
                             <textarea id="message" name="message" rows="5" required></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-block">Send Inquiry</button>
+                        <div class="form-submit-options">
+                            <button type="submit" class="btn btn-primary btn-block">Send Inquiry</button>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -751,10 +753,13 @@
         </div>
     </footer>
 
-    <!-- Back to Top Button -->
-    <a href="#" id="back-to-top" class="back-to-top">
-        <i class="fas fa-arrow-up"></i>
-    </a>
+    <!-- WhatsApp Button with Tooltip -->
+    <div class="whatsapp-container">
+        <a href="https://wa.me/+491735150709" class="back-to-top whatsapp-float" target="_blank">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+        <span class="whatsapp-tooltip">Chat on WhatsApp</span>
+    </div>
 
     <!-- JavaScript Files -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -1650,6 +1655,46 @@
         
         console.log("Rotated radial equalizer animation created successfully!");
       });
+    </script>
+
+    <!-- Add this to your JavaScript file
+    document.getElementById('rental-inquiry-form').addEventListener('submit', function(event) {
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const message = document.getElementById('message').value.trim();
+        
+        if (name === '' || email === '' || message === '') {
+            event.preventDefault();
+            alert('Please fill in all required fields.');
+            return false;
+        }
+        
+        // Basic email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            event.preventDefault();
+            alert('Please enter a valid email address.');
+            return false;
+        }
+        
+        return true;
+    }); -->
+
+    <div id="form-messages" class="form-messages"></div>
+
+    <!-- Add this script at the end of the body -->
+    <script>
+        // Show success/error messages
+        function showFormMessage(type, message) {
+            const messagesDiv = document.getElementById('form-messages');
+            messagesDiv.innerHTML = `<div class="${type}-message">${message}</div>`;
+            messagesDiv.style.display = 'block';
+            
+            // Hide message after 5 seconds
+            setTimeout(() => {
+                messagesDiv.style.display = 'none';
+            }, 5000);
+        }
     </script>
 </body>
 </html> 
