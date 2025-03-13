@@ -52,23 +52,13 @@
                     <div class="hero-content">
                         <h1 class="animated-text">DJ GARRY</h1>
                         <h2 class="animated-text-delay">PREMIUM EQUIPMENT RENTAL</h2>
-                        <p class="animated-text-delay-2">High-Quality Speakers, Screens, Mic Sets, DJ Consoles, Sound & Lighting</p>
+                        <p class="animated-text-delay-2">High-Quality DJ Sound & Lighting</p>
                         <div class="hero-buttons animated-text-delay-3">
                             <a href="#equipment" class="btn btn-primary">Explore Equipment</a>
                             <a href="#contact" class="btn btn-secondary">Get a Quote</a>
                         </div>
                     </div>
                 </div>
-                <!-- <div class="sound-wave-animation">
-                    <div class="sound-bar"></div>
-                    <div class="sound-bar"></div>
-                    <div class="sound-bar"></div>
-                    <div class="sound-bar"></div>
-                    <div class="sound-bar"></div>
-                    <div class="sound-bar"></div>
-                    <div class="sound-bar"></div>
-                    <div class="sound-bar"></div>
-                </div> -->
             </div>
         </div>
     </section>
@@ -824,7 +814,7 @@
                         speakerVibration.className = 'speaker-vibration';
                         
                         // Add speakers
-                        for (let i = 0; i < 3; i++) {
+                        for (let i = 0; i < 2; i++) {
                             const speaker = document.createElement('div');
                             speaker.className = 'speaker';
                             speakerVibration.appendChild(speaker);
@@ -1062,7 +1052,7 @@
                 const equalizerContainer = document.createElement('div');
                 equalizerContainer.className = 'equalizer-container';
                 equalizerContainer.style.position = 'absolute';
-                equalizerContainer.style.top = '20%';
+                equalizerContainer.style.top = '50%';
                 equalizerContainer.style.left = '50%';
                 equalizerContainer.style.transform = 'translateX(-50%)';
                 equalizerContainer.style.zIndex = '2';
@@ -1290,7 +1280,7 @@
         equalizer.className = 'emergency-equalizer';
         equalizer.style.cssText = `
           position: absolute;
-          top: 20%;
+          top: 50%;
           left: 50%;
           transform: translateX(-50%);
           width: 80%;
@@ -1329,7 +1319,7 @@
             animation: emergency-equalize 0.5s infinite ease-in-out alternate;
           `;
           
-          equalizer.appendChild(bar);
+          //equalizer.appendChild(bar);
         }
         
         // Step 7: Safely append equalizer to hero section
@@ -1373,7 +1363,7 @@
         
         // Step 10: Safely append reflection to hero section
         try {
-          heroSection.appendChild(reflection);
+          //heroSection.appendChild(reflection);
           console.log("Reflection added successfully");
         } catch (e) {
           console.error("Error appending reflection:", e);
@@ -1519,11 +1509,11 @@
         leftEqualizer.className = 'side-equalizer left-equalizer';
         leftEqualizer.style.cssText = `
           position: absolute;
-          top: 50%;
+          top: 10%;
           left: 0;
           transform: translateY(-50%);
-          width: 40%;
-          height: 60%;
+          width: 50%;
+          height: 20%;
           display: flex;
           align-items: center;
           justify-content: space-around;
@@ -1535,11 +1525,11 @@
         rightEqualizer.className = 'side-equalizer right-equalizer';
         rightEqualizer.style.cssText = `
           position: absolute;
-          top: 50%;
+          top: 10%;
           right: 0;
           transform: translateY(-50%);
-          width: 40%;
-          height: 60%;
+          width: 50%;
+          height: 20%;
           display: flex;
           align-items: center;
           justify-content: space-around;
@@ -1602,7 +1592,7 @@
         radialEqualizer.appendChild(raysContainer);
         radialEqualizer.appendChild(leftEqualizer);
         radialEqualizer.appendChild(rightEqualizer);
-        radialEqualizer.appendChild(centerLight);
+        //radialEqualizer.appendChild(centerLight);
         
         // Add the radial equalizer to the hero section
         heroSection.appendChild(radialEqualizer);

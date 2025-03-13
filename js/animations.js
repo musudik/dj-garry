@@ -469,12 +469,12 @@
         container.appendChild(speakerVibration);
         
         // Create speakers
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < 2; i++) {
             const speaker = document.createElement('div');
             speaker.className = 'speaker';
             
             // Add speaker rings
-            for (let j = 0; j < 3; j++) {
+            for (let j = 0; j < 2; j++) {
                 const ring = document.createElement('div');
                 ring.className = 'speaker-ring';
                 ring.style.animationDelay = `${j * 0.3}s`;
